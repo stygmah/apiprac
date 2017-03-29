@@ -1,37 +1,59 @@
 var {SHA256} = require('crypto-js');
 var jwt = require('jsonwebtoken');
+var bcrypt = require('bcryptjs');
 
-var data = {
-	id:2
-};
+var password = '123Abc!';
 
-var token = jwt.sign(data,'valar_morghulis');
-console.log(token);
+// bcrypt.genSalt(12, (err,salt)=>{
+// 	bcrypt.hash(password, salt, (err,hash)=>{
+// 		if (err) {
+// 			return console.log('ERROR: ',err);
+// 		};
+// 		console.log(hash);
+// 	});
+// });
 
-var decoded = jwt.verify(token, 'valar_morghulis');
-console.log(decoded);
+var hashedVal = '$2a$12$hrkCL8lGERydQlJ34CyiR.YRXUdZZmWgAj4VkV3o4uBdh5/InTBDG';
 
-// var message = "USER NUMBER 34";
+bcrypt.compare(password,hashedVal, (err,res)=>{
+	console.log(res);
+});
 
-// var hash = SHA256(message).toString();
 
-// console.log(message);
-// console.log(hash);
+
 
 
 // var data = {
-// 	id: 4
+// 	id:2
 // };
 
-// var token = {
-// 	data,
-// 	hash: SHA256(JSON.stringify(data)+"salt").toString()
-// }
+// var token = jwt.sign(data,'valar_morghulis');
+// console.log(token);
 
-// var resultHash = SHA256(JSON.stringify(token.data) + "salt").toString();
+// var decoded = jwt.verify(token, 'valar_morghulis');
+// console.log(decoded);
 
-// if(resultHash === token.hash){
-// 	console.log('Data not changed');
-// }else{
-// 	console.log('Data compromised');
-// }
+// // var message = "USER NUMBER 34";
+
+// // var hash = SHA256(message).toString();
+
+// // console.log(message);
+// // console.log(hash);
+
+
+// // var data = {
+// // 	id: 4
+// // };
+
+// // var token = {
+// // 	data,
+// // 	hash: SHA256(JSON.stringify(data)+"salt").toString()
+// // }
+
+// // var resultHash = SHA256(JSON.stringify(token.data) + "salt").toString();
+
+// // if(resultHash === token.hash){
+// // 	console.log('Data not changed');
+// // }else{
+// // 	console.log('Data compromised');
+// // }
